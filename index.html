@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskMeMobile - Your Trusted Mobile Phone Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navbar-bg: #37353E;
+            --footer-bg: #37353E;
+            --body-bg: #D3DAD9;
+            --button-color: #715A5A;
+            --heading-color: #44444E;
+            --text-color: #5A5A66;
+            --text-light: #6B6B78;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #E5E5E9;
+            --shadow-sm: 0 2px 8px rgba(68, 68, 78, 0.08);
+            --shadow-md: 0 4px 16px rgba(68, 68, 78, 0.12);
+            --shadow-lg: 0 8px 32px rgba(68, 68, 78, 0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--body-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- NEW RESPONSIVE NAVBAR STYLES --- */
+        .main-navbar {
+            background-color: var(--navbar-bg);
+            color: var(--white);
+            height: 75px; /* Match carousel margin-top */
+            display: flex;
+            align-items: center;
+            position: fixed; /* Fixed header */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .a-1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--white);
+        }
+
+        /* Burger Menu Button Styles (Hidden on Desktop) */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--white);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            /* Show Burger Menu */
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            /* Nav Links become a sidebar */
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Hidden by default */
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--navbar-bg);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+                padding-top: 60px;
+            }
+
+            .nav-links.active {
+                right: 0; /* Slide in */
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                color: rgba(255,255,255,0.9);
+            }
+
+            /* Burger Animation to X */
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+        }
+        /* --- END NAVBAR STYLES --- */
+
+        /* Hero/Carousel Section */
+        .carousel-section {
+            margin-top: 75px; /* Space for fixed navbar */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            aspect-ratio: 21/9;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+       .slide-content {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(55, 53, 62, 0.95) 0%,
+                rgba(55, 53, 62, 0.6) 40%,
+                transparent 100%
+            );
+            color: var(--white);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+      .slide-content h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+            color: white;
+        }
+
+        .slide-content p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            opacity: 0.95;
+            max-width: 700px;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .slide-content .btn-1 {
+            all: unset;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.2;
+            background-color: white;
+            color: #37353E;
+            border-radius: 40px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            max-width: max-content;
+            white-space: nowrap;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: var(--shadow-md);
+        }
+
+        .carousel-nav:hover {
+            background: var(--white);
+            transform: translateY(-50%) scale(1.08);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .carousel-nav.prev { left: 30px; }
+        .carousel-nav.next { right: 30px; }
+
+        .carousel-nav svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--button-color);
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            padding: 25px 0;
+            background: var(--body-bg);
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border-color);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .carousel-dot:hover {
+            background: var(--button-color);
+            transform: scale(1.15);
+        }
+
+        .carousel-dot.active {
+            background: var(--button-color);
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        /* Section Styling */
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--heading-color);
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        /* Featured Phones Grid */
+        .phones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .phone-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .phone-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--button-color);
+        }
+
+        .phone-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #715A5A 0%, #44444E 100%);
+        }
+
+        .phone-info {
+            padding: 30px;
+        }
+
+        .phone-brand {
+            font-size: 0.8rem;
+            color: var(--button-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .phone-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            margin-bottom: 15px;
+            letter-spacing: -0.3px;
+        }
+
+        .phone-specs {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .spec-badge {
+            background: rgba(113, 90, 90, 0.1);
+            color: var(--button-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .phone-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 15px 0;
+        }
+
+        .phone-cta {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn-small {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-view {
+            background: var(--button-color);
+            color: var(--white);
+        }
+
+        .btn-view:hover {
+            background: #5E4848;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-compare {
+            background: transparent;
+            color: var(--button-color);
+            border: 2px solid var(--button-color);
+        }
+
+        .btn-compare:hover {
+            background: var(--button-color);
+            color: var(--white);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 70px 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--heading-color);
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 70px 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background: var(--body-bg);
+            padding: 35px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .quote-icon {
+            font-size: 3.5rem;
+            color: var(--button-color);
+            opacity: 0.2;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            font-weight: 700;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin: 45px 0 25px;
+            color: var(--text-color);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .author-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            color: var(--heading-color);
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+
+        .author-info p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 100px 40px;
+            background-image: url(IMAGES/cta-section-img.jpeg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(113, 90, 90, 0.85);
+        }
+
+        .cta-section * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 20px;
+            color: var(--white);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--white);
+            color: var(--button-color);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            padding: 70px 40px 35px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--white);
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 35px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Extra Responsive Tweaks for Grids */
+        @media (max-width: 1024px) {
+            .nav-container { padding: 0 30px; }
+            .section { padding: 60px 30px; }
+            .carousel-nav { width: 45px; height: 45px; }
+            .slide-content { padding: 40px 30px; }
+        }
+
+        @media (max-width: 768px) {
+            .section { padding: 50px 20px; }
+            .phones-grid { grid-template-columns: 1fr; gap: 25px; }
+            .carousel-slide { aspect-ratio: 4/3; }
+            .carousel-nav { width: 40px; height: 40px; }
+            .carousel-nav.prev { left: 15px; }
+            .carousel-nav.next { right: 15px; }
+            .stats-grid, .testimonial-grid { gap: 35px; }
+            .cta-section { padding: 70px 25px; }
+            .footer-content { gap: 35px; }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-slide { aspect-ratio: 1/1; }
+            .slide-content { padding: 25px 20px; }
+            .phone-info { padding: 25px; }
+            .stats-section, .testimonials { padding: 50px 25px; }
+            .testimonial-card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+     <!-- Navbar -->
+    <nav class="main-navbar">
+        <div class="nav-container">
+            <a href="index.html" class="a-1">Ask-me Mobile</a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="compare.html">Compare</a></li>
+                <li><a href="FAQ.html">FAQ</a></li>
+                <li><a href="review.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="team.html">Team</a></li>
+            </ul>
+            
+            <!-- Moved Toggle inside nav-container for better alignment -->
+            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Carousel -->
+   <section class="carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide">
+                    <img src="IMAGES/ChatGPT Image Dec 2, 2025, 09_24_51 AM.png" alt="Latest Flagship Phones">
+                    <div class="slide-content">
+                        <h2>Latest Flagship Phones 2025</h2>
+                        <p>Discover cutting-edge technology and premium features in the newest releases</p>
+                        <a href="GalaxyS21.html" class="btn-1 btn-small btn-view">View Details</a>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="IMAGES/Review-img.jpeg" alt="Phone Comparison Tools">
+                    <div class="slide-content">
+                        <h2>Compare Side by Side</h2>
+                        <p>Find the perfect match for your needs with our detailed comparison tools</p>
+                        <a href="compare.html" class="btn-1 btn-small btn-view">Compare Now</a>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="IMAGES/WhatsApp Image 2025-12-26 at 11.56.46 AM.jpeg" alt="Expert Phone Reviews">
+                    <div class="slide-content">
+                        <h2>Honest Expert Reviews</h2>
+                        <p>Real-world testing and analysis from our team of tech enthusiasts</p>
+                        <a href="review.html" class="btn-1 btn-small btn-view">Explore Review</a>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous slide">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+            <button class="carousel-nav next" id="carouselNext" aria-label="Next slide">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="carousel-dots" id="carouselDots"></div>
+    </section>
+
+    <!-- Featured Phones -->
+    <section class="section" id="featured">
+        <h2 class="section-title">Featured Phones This Month</h2>
+        <p class="section-subtitle">These are the phones everyone's talking about right now. Whether you're a gamer, photographer, or just need something reliable, we've got you covered.</p>
+        
+        <div class="phones-grid">
+            <div class="phone-card">
+                <img src="IMAGES/Samsung Galaxy S21.jpg" alt="Galaxy S21" class="phone-image">
+                <div class="phone-info">
+                    <div class="phone-brand">Samsung</div>
+                    <h3 class="phone-name">Galaxy S21</h3>
+                    <div class="phone-specs">
+                        <span class="spec-badge">120Hz Display</span>
+                        <span class="spec-badge">5G</span>
+                        <span class="spec-badge">64MP Camera</span>
+                    </div>
+                    <p class="phone-description">Flagship performance without breaking the bank. The S21 still holds up amazingly well with its smooth display and versatile camera system.</p>
+                    <div class="phone-cta">
+                        <a href="GalaxyS21.html" class="btn-small btn-view">View Details</a>
+                        <a href="compare.html" class="btn-small btn-compare">Compare</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phone-card">
+                <img src="IMAGES/Iphone-imp.jpeg" alt="iPhone 15" class="phone-image">
+                <div class="phone-info">
+                    <div class="phone-brand">Apple</div>
+                    <h3 class="phone-name">iPhone 15</h3>
+                    <div class="phone-specs">
+                        <span class="spec-badge">A16 Chip</span>
+                        <span class="spec-badge">48MP</span>
+                        <span class="spec-badge">USB-C</span>
+                    </div>
+                    <p class="phone-description">Finally, Apple added USB-C! But that's not all—the camera upgrades and Dynamic Island make this a solid choice for iOS fans.</p>
+                    <div class="phone-cta">
+                        <a href="iPhone 15.html" class="btn-small btn-view">View Details</a>
+                        <a href="compare.html" class="btn-small btn-compare">Compare</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phone-card">
+                <img src="IMAGES/ASUS ROG Phone 6 Pro.jpg" alt="ROG Phone 6" class="phone-image">
+                <div class="phone-info">
+                    <div class="phone-brand">ASUS</div>
+                    <h3 class="phone-name">ROG Phone 6</h3>
+                    <div class="phone-specs">
+                        <span class="spec-badge">165Hz</span>
+                        <span class="spec-badge">6000mAh</span>
+                        <span class="spec-badge">Gaming</span>
+                    </div>
+                    <p class="phone-description">For serious mobile gamers only. This beast has triggers, RGB lighting, and a refresh rate that makes every game buttery smooth.</p>
+                    <div class="phone-cta">
+                        <a href="Asus ROG Phone 6.html" class="btn-small btn-view">View Details</a>
+                        <a href="compare.html" class="btn-small btn-compare">Compare</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section">
+        <div class="stats-section">
+            <h2 class="section-title">Why Trust Us?</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Phones Reviewed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Happy Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Brands Covered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section">
+        <div class="testimonials">
+            <h2 class="section-title">What People Are Saying</h2>
+            <p class="section-subtitle">Don't just take our word for it—here's what real users think about AskMeMobile</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">I was torn between the Galaxy S22 and iPhone 14. Used the comparison tool here and it literally showed me everything side-by-side. Ended up getting the S22 and couldn't be happier! The camera is insane.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="IMAGES/review-people-img-1.jpg" alt="Sarah Mitchell">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Mitchell</h4>
+                            <p>Content Creator</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">As someone who's not tech-savvy, I appreciated how they explain everything in plain English. No jargon, just honest reviews. Found the perfect phone for my mom within 10 minutes!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="IMAGES/people-img-2.jpg" alt="James Rodriguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>James Rodriguez</h4>
+                            <p>Teacher</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="quote-icon">"</div>
+                    <p class="testimonial-text">The battery life comparisons are spot-on. I travel a lot and needed something that wouldn't die on me. Got the phone they recommended and it easily lasts me 2 days. Game changer!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="IMAGES/people-img-3.jpg" alt="Aisha Khan">
+                        </div>
+                        <div class="author-info">
+                            <h4>Aisha Khan</h4>
+                            <p>Travel Blogger</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="cta-section">
+            <h2>Ready to Find Your Next Phone?</h2>
+            <p>Compare specs, read reviews, and make an informed decision</p>
+            <a href="compare.html" class="btn btn-primary">Start Comparing Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About AskMeMobile</h3>
+                <p>We're phone enthusiasts who got tired of biased reviews and confusing specs. So we built this site to help people make smarter phone choices.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="compare.html">Compare Phones</a>
+                <a href="FAQ.html">FAQ</a>
+                <a href="review.html">Reviews</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="team.html">Team</a>
+            </div>
+            <div class="footer-section">
+                <h3>Popular Brands</h3>
+                <a href="https://www.samsung.com">Samsung</a>
+                <a href="https://www.apple.com">Apple</a>
+                <a href="https://store.google.com">Google Pixel</a>
+                <a href="https://www.oneplus.com">OnePlus</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <a href="https://www.twitter.com">Twitter</a>
+                <a href="https://www.instagram.com">Instagram</a>
+                <a href="https://www.youtube.com">YouTube</a>
+                <a href="https://www.facebook.com">Facebook</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AskMeMobile. Made with ❤️ for phone lovers everywhere.</p>
+        </div>
+    </footer>
+
+    <script>
+       (function() {
+    class PhoneCarousel {
+        constructor() {
+            this.track = document.getElementById('carouselTrack');
+            this.slides = document.querySelectorAll('.carousel-slide');
+            this.prevBtn = document.getElementById('carouselPrev');
+            this.nextBtn = document.getElementById('carouselNext');
+            this.dotsContainer = document.getElementById('carouselDots');
+            
+            this.currentIndex = 0;
+            this.totalSlides = this.slides.length;
+            this.autoplayInterval = null;
+            this.autoplayDelay = 5000;
+            this.isTransitioning = false;
+            
+            this.init();
+        }
+
+        init() {
+            if (!this.track || this.totalSlides === 0) return;
+            
+            this.createDots();
+            this.attachEventListeners();
+            this.startAutoplay();
+            this.updateCarousel();
+        }
+
+        createDots() {
+            for (let i = 0; i < this.totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.classList.add('carousel-dot');
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => this.goToSlide(i));
+                this.dotsContainer.appendChild(dot);
+            }
+            this.dots = document.querySelectorAll('.carousel-dot');
+        }
+
+        attachEventListeners() {
+            this.prevBtn.addEventListener('click', () => this.prevSlide());
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+
+            const wrapper = this.track.parentElement;
+            wrapper.addEventListener('mouseenter', () => this.stopAutoplay());
+            wrapper.addEventListener('mouseleave', () => this.startAutoplay());
+
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            this.track.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            this.track.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                this.handleSwipe(touchStartX, touchEndX);
+            }, { passive: true });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') this.prevSlide();
+                if (e.key === 'ArrowRight') this.nextSlide();
+            });
+        }
+
+        handleSwipe(startX, endX) {
+            const threshold = 50;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > threshold && !this.isTransitioning) {
+                if (diff > 0) {
+                    this.nextSlide();
+                } else {
+                    this.prevSlide();
+                }
+            }
+        }
+
+        updateCarousel() {
+            if (this.isTransitioning) return;
+            
+            this.isTransitioning = true;
+            const offset = -this.currentIndex * 100;
+            this.track.style.transform = `translateX(${offset}%)`;
+            
+            this.dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === this.currentIndex);
+            });
+
+            setTimeout(() => {
+                this.isTransitioning = false;
+            }, 600);
+        }
+
+        goToSlide(index) {
+            if (this.isTransitioning || index === this.currentIndex) return;
+            this.currentIndex = index;
+            this.updateCarousel();
+            this.resetAutoplay();
+        }
+
+        nextSlide() {
+            if (this.isTransitioning) return;
+            this.currentIndex = (this.currentIndex + 1) % this.totalSlides;
+            this.updateCarousel();
+            this.resetAutoplay();
+        }
+
+        prevSlide() {
+            if (this.isTransitioning) return;
+            this.currentIndex = (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
+            this.updateCarousel();
+            this.resetAutoplay();
+        }
+
+        startAutoplay() {
+            this.stopAutoplay();
+            this.autoplayInterval = setInterval(() => {
+                if (!this.isTransitioning) {
+                    this.nextSlide();
+                }
+            }, this.autoplayDelay);
+        }
+
+        stopAutoplay() {
+            if (this.autoplayInterval) {
+                clearInterval(this.autoplayInterval);
+                this.autoplayInterval = null;
+            }
+        }
+
+        resetAutoplay() {
+            this.stopAutoplay();
+            this.startAutoplay();
+        }
+    }
+
+    // Initialize carousel
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            new PhoneCarousel();
+        });
+    } else {
+        new PhoneCarousel();
+    }
+})();
+    </script>
+    
+    <!-- NEW: Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

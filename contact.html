@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - AskMeMobile</title>
+    <link rel="stylesheet" href="STYLE/navbar.css">
+    <link rel="stylesheet" href="STYLE/foooter.css">
+    <style>
+        :root {
+            --navbar-bg: #37353E;
+            --footer-bg: #37353E;
+            --body-bg: #D3DAD9;
+            --button-color: #715A5A;
+            --heading-color: #44444E;
+            --text-color: #5A5A66;
+            --text-light: #6B6B78;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #E5E5E9;
+            --shadow-sm: 0 2px 8px rgba(68, 68, 78, 0.08);
+            --shadow-md: 0 4px 16px rgba(68, 68, 78, 0.12);
+            --shadow-lg: 0 8px 32px rgba(68, 68, 78, 0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ .a-1 {
+            color: #D3DAD9;
+            font-size: 30px;
+            list-style: none;
+              text-decoration: none;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--body-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #37353E 0%, #404044 100%);
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-section h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: -60px auto 80px;
+            padding: 0 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        /* Contact Info Cards */
+        .contact-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(58, 123, 255, 0.15);
+        }
+
+        .info-card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        .info-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .info-card a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Contact Form */
+        .contact-form-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-form-card h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .form-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(58, 123, 255, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .char-count {
+            text-align: right;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: black;
+            padding: 16px 40px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(58, 123, 255, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            background: var(--success-color);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 15px;
+            animation: slideIn 0.5s ease;
+        }
+
+        .success-message.show {
+            display: flex;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* FAQ Quick Access */
+        .faq-quick {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 60px;
+        }
+
+        .faq-quick h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .faq-quick p {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .faq-card {
+            background: var(--dark-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .faq-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .faq-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .faq-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .faq-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .faq-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s;
+        }
+
+        .faq-link:hover {
+            gap: 10px;
+        }
+
+        /* Office Hours */
+        .office-hours {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 60px;
+        }
+
+        .office-hours h2 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background: var(--dark-bg);
+            border-radius: 10px;
+        }
+
+        .hours-day {
+            font-weight: 600;
+        }
+
+        .hours-time {
+            color: var(--text-secondary);
+        }
+
+        .hours-time.open {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 20px;
+            }
+
+            .container {
+                margin-top: -40px;
+            }
+
+            .contact-form-card,
+            .faq-quick,
+            .office-hours {
+                padding: 25px;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-navbar">
+        <div class="nav-container">
+            <a href="index.html" class="a-1">Ask-me Mobile</a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="compare.html">Compare</a></li>
+                <li><a href="FAQ.html">FAQ</a></li>
+                <li><a href="review.html">Reviews</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                 <li><a href="team.html">Team</a></li>
+            </ul>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <h1>Let's Talk</h1>
+        <p>Have a question? Need help choosing a phone? Just want to chat about tech? We're all ears (well, technically all eyes since this is text, but you get the idea).</p>
+    </div>
+
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Sidebar -->
+            <div class="contact-sidebar">
+                <div class="info-card">
+                    <!-- <div class="info-card-icon"></div> -->
+                    <h3>Our Office</h3>
+                    <p>123 Tech Street<br>
+                    Silicon Valley, CA 94025<br>
+                    United States</p>
+                    <p style="margin-top: 15px; font-size: 0.9rem;">Visitors welcome by appointment only (we're usually elbow-deep in phone testing).</p>
+                </div>
+
+                <div class="info-card" style="padding: 0; overflow: hidden; height: 450px;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.639097027!2d-122.0842499!3d37.4029444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb7495bec0189%3A0x7c17d44a466baf9b!2sSilicon%20Valley%2C%20CA!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-card">
+                <div class="success-message" id="successMessage">
+                    <span style="font-size: 2rem;">✓</span>
+                    <div>
+                        <strong>Message Sent!</strong><br>
+                        We'll get back to you within 24 hours. Check your email!
+                    </div>
+                </div>
+
+                <h2>Send Us a Message</h2>
+                <p class="form-subtitle">Whether you've got feedback, questions, or just want to debate which phone has the best camera, we're here for it.</p>
+
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required placeholder="John">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required placeholder="Doe">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number (Optional)</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">What's This About? *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a topic...</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="phone-recommendation">Need a Phone Recommendation</option>
+                            <option value="technical">Technical Issue</option>
+                            <option value="partnership">Partnership Opportunity</option>
+                            <option value="feedback">Feedback/Suggestion</option>
+                            <option value="review">Submit a Review</option>
+                            <option value="other">Something Else</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell us what's on your mind... Be as detailed as you want! We read everything."></textarea>
+                        <div class="char-count">
+                            <span id="charCount">0</span> / 1000 characters
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Send Message
+                    </button>
+
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 20px; text-align: center;">
+                        By submitting this form, you agree to our Privacy Policy. We promise not to spam you—we hate that as much as you do.
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <!-- FAQ Quick Access -->
+        <div class="faq-quick">
+            <h2>Before You Reach Out...</h2>
+            <p>Maybe we've already answered your question! Check out these common topics:</p>
+            <div class="faq-grid">
+                <div class="faq-card">
+                    <!-- <div class="faq-icon">📱</div> -->
+                    <h4>Phone Specs</h4>
+                    <p>Questions about specifications, features, or compatibility?</p>
+                    <a href="FAQ.html" class="faq-link">View Spec FAQs →</a>
+                </div>
+                <div class="faq-card">
+                    <!-- <div class="faq-icon">⚖️</div> -->
+                    <h4>Comparisons</h4>
+                    <p>Not sure how to use our comparison tool?</p>
+                    <a href="FAQ.html" class="faq-link">Comparison Guide →</a>
+                </div>
+                <div class="faq-card">
+                    <!-- <div class="faq-icon">💰</div> -->
+                    <h4>Pricing</h4>
+                    <p>Questions about pricing, deals, or where to buy?</p>
+                    <a href="FAQ.html" class="faq-link">Pricing FAQs →</a>
+                </div>
+                <div class="faq-card">
+                    <!-- <div class="faq-icon">🛡️</div> -->
+                    <h4>Warranty</h4>
+                    <p>Need info about warranties and support?</p>
+                    <a href="FAQ.html" class="faq-link">Warranty Info →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Office Hours
+        <div class="office-hours">
+            <h2>Support Hours</h2>
+            <div class="hours-grid">
+                <div class="hours-item">
+                    <span class="hours-day">Monday</span>
+                    <span class="hours-time open">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Tuesday</span>
+                    <span class="hours-time open">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Wednesday</span>
+                    <span class="hours-time open">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Thursday</span>
+                    <span class="hours-time open">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Friday</span>
+                    <span class="hours-time open">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Saturday</span>
+                    <span class="hours-time">10:00 AM - 4:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="hours-day">Sunday</span>
+                    <span class="hours-time">Closed</span>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-secondary); margin-top: 25px; font-size: 0.95rem;">
+                *All times are EST. Email support is available 24/7, but responses may take longer on weekends.
+            </p>
+        </div>
+    </div> -->
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About AskMeMobile</h3>
+                <p>We're phone enthusiasts who got tired of biased reviews and confusing specs. So we built this site to help people make smarter phone choices.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="compare.html">Compare Phones</a>
+                <a href="FAQ.html">FAQ</a>
+                <a href="review.html">Reviews</a>
+                <a href="contact.html">Contact Us</a>
+                  <a href="team.html">Team</a>
+            </div>
+            <div class="footer-section">
+                <h3>Popular Brands</h3>
+                <a href="https://www.samsung.com">Samsung</a>
+                <a href="https://www.apple.com">Apple</a>
+                <a href="https://store.google.com">Google Pixel</a>
+                <a href="https://www.oneplus.com">OnePlus</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <a href="https://www.twitter.com">Twitter</a>
+                <a href="https://www.instagram.com">Instagram</a>
+                <a href="https://www.youtube.com">YouTube</a>
+                <a href="https://www.facebook.com">Facebook</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AskMeMobile. Made with ❤️ for phone lovers everywhere.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Character Counter
+        const messageField = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+
+        messageField.addEventListener('input', () => {
+            const count = messageField.value.length;
+            charCount.textContent = count;
+            
+            if (count > 1000) {
+                charCount.style.color = '#ef4444';
+                messageField.value = messageField.value.substring(0, 1000);
+            } else {
+                charCount.style.color = 'var(--text-secondary)';
+            }
+        });
+
+        // Form Validation Functions
+        function showError(field, message) {
+            // Remove any existing error message
+            removeError(field);
+            
+            // Add error styling
+            field.style.borderColor = '#ef4444';
+            
+            // Create and add error message
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.color = '#ef4444';
+            errorDiv.style.fontSize = '0.9rem';
+            errorDiv.style.marginTop = '5px';
+            errorDiv.textContent = message;
+            
+            field.parentElement.appendChild(errorDiv);
+        }
+
+        function removeError(field) {
+            field.style.borderColor = 'var(--border-color)';
+            const existingError = field.parentElement.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+        }
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validatePhone(phone) {
+            // Allow empty phone (optional field) or valid formats
+            if (!phone) return true;
+            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+            return phoneRegex.test(phone) && phone.replace(/\D/g, '').length >= 10;
+        }
+
+        function validateName(name) {
+            return name.trim().length >= 2;
+        }
+
+        function validateMessage(message) {
+            return message.trim().length >= 10;
+        }
+
+        // Real-time validation
+        const firstName = document.getElementById('firstName');
+        const lastName = document.getElementById('lastName');
+        const email = document.getElementById('email');
+        const phone = document.getElementById('phone');
+        const subject = document.getElementById('subject');
+        const message = document.getElementById('message');
+
+        firstName.addEventListener('blur', () => {
+            if (!validateName(firstName.value)) {
+                showError(firstName, 'First name must be at least 2 characters');
+            } else {
+                removeError(firstName);
+            }
+        });
+
+        firstName.addEventListener('input', () => {
+            if (firstName.value.length >= 2) {
+                removeError(firstName);
+            }
+        });
+
+        lastName.addEventListener('blur', () => {
+            if (!validateName(lastName.value)) {
+                showError(lastName, 'Last name must be at least 2 characters');
+            } else {
+                removeError(lastName);
+            }
+        });
+
+        lastName.addEventListener('input', () => {
+            if (lastName.value.length >= 2) {
+                removeError(lastName);
+            }
+        });
+
+        email.addEventListener('blur', () => {
+            if (!email.value) {
+                showError(email, 'Email address is required');
+            } else if (!validateEmail(email.value)) {
+                showError(email, 'Please enter a valid email address');
+            } else {
+                removeError(email);
+            }
+        });
+
+        email.addEventListener('input', () => {
+            if (validateEmail(email.value)) {
+                removeError(email);
+            }
+        });
+
+        phone.addEventListener('blur', () => {
+            if (phone.value && !validatePhone(phone.value)) {
+                showError(phone, 'Please enter a valid phone number (at least 10 digits)');
+            } else {
+                removeError(phone);
+            }
+        });
+
+        phone.addEventListener('input', () => {
+            if (!phone.value || validatePhone(phone.value)) {
+                removeError(phone);
+            }
+        });
+
+        subject.addEventListener('change', () => {
+            if (!subject.value) {
+                showError(subject, 'Please select a topic');
+            } else {
+                removeError(subject);
+            }
+        });
+
+        message.addEventListener('blur', () => {
+            if (!message.value) {
+                showError(message, 'Message is required');
+            } else if (!validateMessage(message.value)) {
+                showError(message, 'Message must be at least 10 characters');
+            } else {
+                removeError(message);
+            }
+        });
+
+        message.addEventListener('input', () => {
+            if (message.value.length >= 10) {
+                removeError(message);
+            }
+        });
+
+        // Form Submission with Validation
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Validate all fields
+            let isValid = true;
+
+            if (!validateName(firstName.value)) {
+                showError(firstName, 'First name must be at least 2 characters');
+                isValid = false;
+            }
+
+            if (!validateName(lastName.value)) {
+                showError(lastName, 'Last name must be at least 2 characters');
+                isValid = false;
+            }
+
+            if (!email.value) {
+                showError(email, 'Email address is required');
+                isValid = false;
+            } else if (!validateEmail(email.value)) {
+                showError(email, 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            if (phone.value && !validatePhone(phone.value)) {
+                showError(phone, 'Please enter a valid phone number (at least 10 digits)');
+                isValid = false;
+            }
+
+            if (!subject.value) {
+                showError(subject, 'Please select a topic');
+                isValid = false;
+            }
+
+            if (!message.value) {
+                showError(message, 'Message is required');
+                isValid = false;
+            } else if (!validateMessage(message.value)) {
+                showError(message, 'Message must be at least 10 characters');
+                isValid = false;
+            }
+
+            // If form is not valid, scroll to first error
+            if (!isValid) {
+                const firstError = document.querySelector('.error-message');
+                if (firstError) {
+                    firstError.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            // Simulate form submission
+            setTimeout(() => {
+                // Show success message
+                successMessage.classList.add('show');
+                
+                // Reset form
+                contactForm.reset();
+                charCount.textContent = '0';
+                
+                // Remove all error messages
+                document.querySelectorAll('.error-message').forEach(err => err.remove());
+                
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+            }, 1500);
+        });
+    </script>
+    <script src="navbar.js"></script>
+</body>
+</html>
